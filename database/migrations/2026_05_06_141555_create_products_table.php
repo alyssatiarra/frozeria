@@ -23,6 +23,8 @@ return new class extends Migration
             $table->integer('stock_min');
             $table->string('unit');
             $table->timestamps();
+            $table->string('weight')->nullable();
+            $table->string('storage_location')->nullable();
         });
     }
 

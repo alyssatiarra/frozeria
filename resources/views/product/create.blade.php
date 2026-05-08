@@ -1,6 +1,13 @@
 @extends('main')
 @section('content')
-<form action="{{ route('product.store') }}" method="POST">
+<style>
+    .text-error {
+        color: #e74c3c;
+        font-size: 0.875em;
+        margin-top: 4px;
+    }
+</style>
+<form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="page active" id="page-form-barang">
         <div class="page-header">
@@ -26,6 +33,7 @@
                     type="file"
                     id="foto-input"
                     accept="image/*"
+                    name="image"
                     onchange="previewFoto(this)" />
             </div>
 
@@ -35,21 +43,33 @@
                     <input
                         type="text"
                         class="form-control"
-                        id="f-nama"
+                        id="f-product_name"
+                        name="product_name"
                         placeholder="Ayam nugget crispy" />
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Kategori <span class="req">*</span></label>
-                        <select class="form-control" id="f-kategori"></select>
+                    <select class="form-control" id="f-category_id" name="category_id">
+                        <option value="">Pilih kategori</option>
+
+                        @foreach($category as $kat)
+                        <option value="{{ $kat->id }}">
+                            {{ $kat->name_category }}
+                        </option>
+                        @endforeach
+                    </select>
+                    <small class="text-error">@error('category_id') {{ $message }} @enderror</small>
                     </div>
                     <div class="form-group">
                         <label>Satuan <span class="req">*</span></label>
                         <input
                             type="text"
                             class="form-control"
-                            id="f-satuan"
+                            id="f-unit"
+                            name="unit"
                             placeholder="pcs" />
+                        <small class="text-error">@error('unit') {{ $message }} @enderror</small>
                     </div>
                 </div>
                 <div class="form-row">
@@ -58,38 +78,46 @@
                         <input
                             type="number"
                             class="form-control"
-                            id="f-stok"
+                            id="f-stock"
                             placeholder="120"
+                            name="stock"
                             min="0" />
+                        <small class="text-error">@error('stock') {{ $message }} @enderror</small>
                     </div>
                     <div class="form-group">
-                        <label>Stok minimum</label>
+                        <label>Stok minimum <span class="req">*</span></label>
                         <input
                             type="number"
                             class="form-control"
-                            id="f-stok-min"
+                            id="f-stock_min"
                             placeholder="20"
+                            name="stock_min"
                             min="0" />
+                        <small class="text-error">@error('stock_min') {{ $message }} @enderror</small>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Harga jual (Rp)</label>
+                        <label>Harga jual (Rp) <span class="req">*</span></label>
                         <input
                             type="number"
                             class="form-control"
-                            id="f-harga-jual"
+                            id="f-selling_price"
                             placeholder="35000"
+                            name="selling_price"
                             min="0" />
+                        <small class="text-error">@error('selling_price') {{ $message }} @enderror</small>
                     </div>
                     <div class="form-group">
-                        <label>Harga beli (Rp)</label>
+                        <label>Harga beli (Rp) <span class="req">*</span></label>
                         <input
                             type="number"
                             class="form-control"
-                            id="f-harga-beli"
+                            id="f-buy_price"
                             placeholder="28000"
+                            name="buy_price"
                             min="0" />
+                        <small class="text-error">@error('buy_price') {{ $message }} @enderror</small>
                     </div>
                 </div>
                 <div class="form-row">
@@ -98,36 +126,36 @@
                         <input
                             type="text"
                             class="form-control"
-                            id="f-berat"
-                            placeholder="500 gram" />
+                            id="f-weight"
+                            placeholder="500 gram"
+                            name="weight" />
+                        <small class="text-error">@error('weight') {{ $message }} @enderror</small>
                     </div>
                     <div class="form-group">
                         <label>Lokasi simpan</label>
                         <input
                             type="text"
                             class="form-control"
-                            id="f-lokasi"
-                            placeholder="Rak A-3" />
+                            id="f-storage_location"
+                            placeholder="Rak A-3"
+                            name="storage_location" />
+                        <small class="text-error">@error('storage_location') {{ $message }} @enderror</small>
                     </div>
                 </div>
                 <div class="form-group">
                     <label>Deskripsi</label>
                     <textarea
                         class="form-control"
-                        id="f-deskripsi"
-                        placeholder="Keterangan produk..."></textarea>
+                        id="f-description"
+                        placeholder="Keterangan produk..."
+                        name="description"></textarea>
+                    <small class="text-error">@error('description') {{ $message }} @enderror</small>
                 </div>
             </div>
 
             <div class="form-actions">
-                <button
-                    class="btn btn-secondary btn-md"
-                    onclick="showPage('dashboard')">
-                    Batal
-                </button>
-                <button class="btn btn-primary btn-md" onclick="simpanBarang()">
-                    Simpan Barang
-                </button>
+                <a class="btn btn-secondary btn-md {{ Request::is('product') ? 'active' : '' }}" href="{{ route('product.index') }}" id="nav-product">Batal</a>
+                <button class="btn btn-primary btn-md" type="submit">Simpan Produk</button>
             </div>
         </div>
     </div>

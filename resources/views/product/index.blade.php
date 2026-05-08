@@ -47,7 +47,31 @@
                         <th>Aksi</th>
                     </tr>
                 </thead>
-                <tbody id="tbl-barang"></tbody>
+                <tbody id="tbl-product">
+                    @foreach ($products as $product)
+                    <tr>
+                        <td>{{ $product->product_name }}</td>
+                        <td>{{ $product->category->name_category ?? 'N/A' }}</td>
+                        <td>{{ $product->stock }}</td>
+                        <td>{{ $product->unit }}</td>
+                        <td>Rp {{ number_format($product->selling_price, 0, ',', '.') }}</td>
+                        <td>
+                            <a class="btn btn-secondary btn-sm" href="{{route('product.show', $product->id)}}" id="nav-product">Detail</a>
+                            <a class="btn btn-secondary btn-sm" href="{{route('product.edit', $product->id)}}" id="nav-product">Edit</a>
+                            <form action="{{ route('product.destroy', $product->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">Hapus</button>
+                            </form>
+                            <!-- <button
+                            class="btn btn-danger btn-sm"
+                            onclick="showModalHapusKat({{ $kat->id }}, '{{ addslashes($kat->name_category) }}')">
+                            Hapus
+                        </button> -->
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
             </table>
             <div class="pagination-row">
                 <span id="pg-info"></span>

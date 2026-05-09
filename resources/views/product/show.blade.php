@@ -167,10 +167,9 @@
                     <textarea
                         class="form-control"
                         id="f-description"
-                        value="{{ $product->description }}"
                         placeholder="Keterangan produk..."
                         name="description"
-                        disabled></textarea>
+                        disabled>{{ $product->description }}</textarea>
                     <small class="text-error">@error('description') {{ $message }} @enderror</small>
                 </div>
             </div>

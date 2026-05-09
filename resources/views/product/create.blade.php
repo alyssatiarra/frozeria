@@ -25,7 +25,7 @@
                     <button
                         class="btn btn-outline btn-sm"
                         style="margin-top: 10px; position: relative; z-index: 2"
-                        onclick="event.stopPropagation()">
+                        onclick="event.stopPropagation()" type="button">
                         Pilih Foto
                     </button>
                 </div>
@@ -160,4 +160,25 @@
         </div>
     </div>
 </form>
+<script>
+    function previewFoto(input) {
+        if (!input.files || !input.files[0]) return;
+        const file = input.files[0];
+        if (file.size > 2 * 1024 * 1024) {
+          alert("Ukuran foto maksimal 2 MB");
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          fotoDataUrl = e.target.result;
+          const prev = document.getElementById("photo-preview");
+          prev.src = fotoDataUrl;
+          prev.style.display = "block";
+          document.getElementById("photo-placeholder").style.display = "none";
+        };
+        reader.readAsDataURL(file);
+      }
+
+      
+</script>
 @endsection

@@ -11,7 +11,12 @@ class CategoryController extends Controller
     public function index()
     {
         $category = Category::all();
-        return view('category.index', compact('category'));
+        $categorySearchPaginate = Category::where('name_category', 'like', '%' . request('q') . '%')
+            ->paginate(5)
+            ->withQueryString();
+        $totalProducts = Category::withCount('products')->get();
+        $category = $categorySearchPaginate;
+        return view('category.index', compact('category', 'totalProducts'));
     }
 
     public function show($id)

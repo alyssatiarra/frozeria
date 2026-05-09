@@ -8,4 +8,9 @@ class Category extends Model
 {
     protected $guarded = ['id'];
     protected $fillable = ['name_category', 'description'];
+
+    function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

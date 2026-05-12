@@ -79,14 +79,14 @@
                     </div>
                     <div class="form-group">
                         <label>Satuan <span class="req">*</span></label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="f-unit"
-                            value="{{ $product->unit }}"
-                            name="unit"
-                            placeholder="pcs" />
-                        <small class="text-error">@error('unit') {{ $message }} @enderror</small>
+                        <select class="form-control" id="f-satuan" name="unit">
+                            <option value="">Pilih satuan</option>
+                            @foreach(['pcs', 'pack', 'box', 'kg', 'gram', 'liter', 'lusin', 'karton', 'botol', 'sachet'] as $satuan)
+                            <option value="{{ old('unit', $product->unit) }}" {{ old('unit', $product->unit) == $satuan ? 'selected' : '' }}>
+                                {{ $satuan }}
+                            </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="form-row">

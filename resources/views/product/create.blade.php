@@ -50,26 +50,27 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Kategori <span class="req">*</span></label>
-                    <select class="form-control" id="f-category_id" name="category_id">
-                        <option value="">Pilih kategori</option>
+                        <select class="form-control" id="f-category_id" name="category_id">
+                            <option value="">Pilih kategori</option>
 
-                        @foreach($category as $kat)
-                        <option value="{{ $kat->id }}">
-                            {{ $kat->name_category }}
-                        </option>
-                        @endforeach
-                    </select>
-                    <small class="text-error">@error('category_id') {{ $message }} @enderror</small>
+                            @foreach($category as $kat)
+                            <option value="{{ $kat->id }}">
+                                {{ $kat->name_category }}
+                            </option>
+                            @endforeach
+                        </select>
+                        <small class="text-error">@error('category_id') {{ $message }} @enderror</small>
                     </div>
                     <div class="form-group">
                         <label>Satuan <span class="req">*</span></label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="f-unit"
-                            name="unit"
-                            placeholder="pcs" />
-                        <small class="text-error">@error('unit') {{ $message }} @enderror</small>
+                        <select class="form-control" id="f-satuan" name="unit">
+                            <option value="">Pilih satuan</option>
+                            @foreach(['pcs', 'pack', 'box', 'kg', 'gram', 'liter', 'lusin', 'karton', 'botol', 'sachet'] as $satuan)
+                            <option value="{{ $satuan }}" {{ old('unit') == $satuan ? 'selected' : '' }}>
+                                {{ $satuan }}
+                            </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="form-row">
@@ -93,7 +94,7 @@
                             placeholder="20"
                             name="stock_min"
                             value="20"
-                            readonly/>
+                            readonly />
                         <small class="text-error">@error('stock_min') {{ $message }} @enderror</small>
                     </div>
                 </div>
@@ -166,20 +167,18 @@
         if (!input.files || !input.files[0]) return;
         const file = input.files[0];
         if (file.size > 2 * 1024 * 1024) {
-          alert("Ukuran foto maksimal 2 MB");
-          return;
+            alert("Ukuran foto maksimal 2 MB");
+            return;
         }
         const reader = new FileReader();
         reader.onload = (e) => {
-          fotoDataUrl = e.target.result;
-          const prev = document.getElementById("photo-preview");
-          prev.src = fotoDataUrl;
-          prev.style.display = "block";
-          document.getElementById("photo-placeholder").style.display = "none";
+            fotoDataUrl = e.target.result;
+            const prev = document.getElementById("photo-preview");
+            prev.src = fotoDataUrl;
+            prev.style.display = "block";
+            document.getElementById("photo-placeholder").style.display = "none";
         };
         reader.readAsDataURL(file);
-      }
-
-      
+    }
 </script>
 @endsection

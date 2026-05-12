@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -67,6 +68,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->delete();
+        Product::where('category_id', $id)->update(['category_id' => null]);
         return redirect()->route('category.index')->with('success', 'Kategori berhasil dihapus');
     }
 }

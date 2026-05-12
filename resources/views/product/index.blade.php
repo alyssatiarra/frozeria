@@ -125,11 +125,6 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="showModalHapus({{ $product->id }}, '{{ addslashes($product->product_name) }}')">Hapus</button>
                             </form>
-                            <!-- <button
-                            class="btn btn-danger btn-sm"
-                            onclick="showModalHapusKat({{ $kat->id }}, '{{ addslashes($kat->name_category) }}')">
-                            Hapus
-                        </button> -->
                         </td>
                     </tr>
                     <div class="modal-overlay" id="modal-hapus{{ $product->id }}">

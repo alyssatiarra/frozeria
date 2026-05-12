@@ -127,7 +127,10 @@
                             </form>
                         </td>
                     </tr>
-                    <div class="modal-overlay" id="modal-hapus{{ $product->id }}">
+                    
+                    @endforeach
+                </tbody>
+                <div class="modal-overlay" id="modal-hapus{{ $product->id }}">
                         <div class="modal">
                             <div class="modal-icon">⚠️</div>
                             <h3>Hapus product?</h3>
@@ -138,8 +141,6 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach
-                </tbody>
             </table>
         </div>
         <div class="pagination-wrapper">

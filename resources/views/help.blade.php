@@ -63,8 +63,7 @@
         <div class="help-step">
             <div class="num">3</div>
             <p>
-                Menghapus kategori tidak akan menghapus barang — barang akan menjadi
-                tidak berkategori.
+                Menghapus kategori akan menghapus barang
             </p>
         </div>
     </div>

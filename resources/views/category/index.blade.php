@@ -103,7 +103,7 @@
                     <div class="modal">
                         <div class="modal-icon">⚠️</div>
                         <h3>Hapus category?</h3>
-                        <p>Data category <strong id="modal-kat-nama"></strong> akan dihapus secara permanen. Barang dengan category ini tidak akan ikut terhapus.</p>
+                        <p>Data category <strong id="modal-kat-nama"></strong> akan dihapus secara permanen. Barang dengan category ini akan ikut terhapus.</p>
                         <div class="modal-actions">
                             <button class="btn btn-secondary btn-md" onclick="closeModalKat({{ $kat->id }})">Batal</button>
                             <button class="btn btn-danger btn-md" onclick="konfirmasiHapusKat({{ $kat->id }})">Ya, Hapus</button>

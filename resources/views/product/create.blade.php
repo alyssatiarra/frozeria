@@ -92,7 +92,8 @@
                             id="f-stock_min"
                             placeholder="20"
                             name="stock_min"
-                            min="0" />
+                            value="20"
+                            readonly/>
                         <small class="text-error">@error('stock_min') {{ $message }} @enderror</small>
                     </div>
                 </div>
